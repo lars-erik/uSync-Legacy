@@ -189,7 +189,7 @@ namespace Jumoo.uSync.Core.Serializers
             node.Add(new XAttribute("templateAlias", item.Template == null ? "" : item.Template.Alias));
 
             node.Add(new XAttribute("sortOrder", item.SortOrder));
-            node.Add(new XAttribute("published", item.Published));
+            node.Add(new XAttribute("published", item.HasPublishedVersion));
 
             if (_blueprintEnabled) { 
                 LogHelper.Debug<ContentSerializer>("Is Blueprint?");

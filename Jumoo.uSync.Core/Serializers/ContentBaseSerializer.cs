@@ -137,8 +137,13 @@ namespace Jumoo.uSync.Core.Serializers
             node.Add(new XAttribute("isDoc", ""));
             node.Add(new XAttribute("updated", item.UpdateDate.ToString("yyyy-MM-ddTHH:mm:ss.fffffff'Z'")));
 
+            var version = item;
+            if (item is IContent content && content.Published == false && content.HasPublishedVersion)
+            {
+                version = _contentService.GetPublishedVersion(content);
+            }
 
-            foreach (var prop in item.Properties.Where(p => p != null).OrderBy(p => p.Alias))
+            foreach (var prop in version.Properties.Where(p => p != null).OrderBy(p => p.Alias))
             {
                 XElement propNode = null;
 
